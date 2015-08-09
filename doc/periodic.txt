@@ -1,0 +1,62 @@
+*periodic.txt*	The Tardy Timer
+
+
+			VIM REFERENCE MANUAL	by Barry Arthur
+
+
+Help on using periodic                                          *periodic*
+
+1. Introduction				|periodic-intro|
+2. Examples				|periodic-examples|
+
+==============================================================================
+ 1. INTRODUCTION                                          *periodic-intro*
+
+Periodic lets you run recurring jobs from within Vim.
+
+It uses vim's |InsertLeave|, |CursorHold|, and |CursorMoved| events to
+run registered jobs that are due. When a job is run, its last executed
+time is updated, effectively rescheduling it for its next periodic
+execution.
+
+Because Periodic depends on Vim's user-driven event system, it is not a
+perfectly accurate and automated timer. Rather, due events will fire
+only after the user interacts with Vim. So, if the user walks away from
+the keyboard for an hour, any due jobs won't be executed until the user
+returns.
+
+
+ 2. EXAMPLES                                           *periodic-examples*
+
+--------------------------------------------------------------------------
+NOTE:~
+
+Periodic is currently in development. The examples shown here use
+the extended sub-command form where the first argument to the :Periodic
+command is a sub-command like `add` or `del` or `list`. This is not
+currently implemented. Currently, `:Periodic` is equivalent to the
+`:Periodic add` version shown.
+
+To delete a job: >
+  :call periodic#del(name)
+<
+To list jobs: >
+  :call periodic#list()
+<
+--------------------------------------------------------------------------
+
+To have Periodic tell you to take a break every hour: >
+  :Periodic add break string Take\ a\ break! 60
+<
+To remove a job (by name): >
+  :Periodic del break
+<
+To have Periodic save your file every 5 minutes: >
+  :Periodic add save exe write 5
+<
+To list all Periodic jobs: >
+  :Periodic list
+<
+
+Template From: https://github.com/dahu/Area-41/
+ vim:tw=78:ts=8:ft=help:norl:
